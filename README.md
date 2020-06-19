@@ -12,6 +12,13 @@ SqueezeNet will be our pre-trained CNN, and we'll re-train its output layers for
 4. Test the model
 5. Deploy model into a web app or soemthing to only it to easily play users.
 
+# Step 0 - Setup
+1. git clone / download this project
+2. Create a virtual environment (recommended for python, I'm using python3) run in terminal "python3 -m venv ."
+3. run "source bin/activate" you should need your root inserted to your terminal.
+4. having pip installed in useful for the next part "easy_install pip"
+5. there is a dependency_list.txt, you can install them with pip run "pip install -r dependency_list.txt"
+
 # Step 1 - Gathering images
 1. script to run first is "collect_image_data.py"
 2. Run command example: python collect_image_data.py rock 200
