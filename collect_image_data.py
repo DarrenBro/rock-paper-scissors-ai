@@ -1,6 +1,6 @@
 # Gather your own data images.
 # Run command example: python collect_image_data.py rock 200
-# Press 's' to start/pause and q to quit.
+# Press 's' to start and q to quit.
 # Images stored in 'collected_images' dir with label set as 1st argument
 
 import cv2
