@@ -1,7 +1,7 @@
 # rock-paper-scissors-ai
-# tensorflow-python
 AI Bot to play rock-paper-scissors against a human
 
+# tensorflow-python
 Code Engine: Image Classifier with 3 categories (rock, paper, scissors)
 SqueezeNet will be our pre-trained CNN, and we'll re-train its output layers for our 3 new categories.
 
