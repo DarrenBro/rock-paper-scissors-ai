@@ -6,11 +6,11 @@ Code Engine: Image Classifier with 3 categories (rock, paper, scissors)
 SqueezeNet will be our pre-trained CNN, and we'll re-train its output layers for our 3 new categories.
 
 # 5 Steps we'll generally follow to create this ai
-1. Collecting data - gathering images from our own webcam
+1. Collecting data - gathering images from our own web camera
 2. Creating a Neural Network
 3. Training the model
 4. Test the model
-5. Deploy model into a web app or soemthing to only it to easily play users.
+5. Deploy model into a web app to easily let users plays.
 
 # Step 0 - Setup
 1. git clone / download this project
