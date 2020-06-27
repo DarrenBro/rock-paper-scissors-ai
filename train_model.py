@@ -1,11 +1,12 @@
+from keras.models import Sequential
+from keras.layers import Dropout, Convolution2D, Activation, GlobalAveragePooling2D
+from keras.optimizers import Adam
+from keras.utils import np_utils
+from keras_squeezenet import SqueezeNet
+
 import cv2
 import numpy as np
-import tensorflow as tf
 import os
-
-from keras import Sequential
-from keras.layers import Dropout, Convolution2D, Activation, GlobalAveragePooling2D
-from keras_squeezenet import SqueezeNet
 
 IMG_SAVE_PATH = 'collected_images'
 
@@ -47,7 +48,7 @@ def train_model():
         # Include_top lets you select if you want the final dense layers or not
         # Dense layers are capable of interpreting found patterns in order to classify: e.g. this image contains rock
         # Set to False as we have labeled what rock data looks like already
-        SqueezeNet(input_shape=(227, 227, 3), include_top=False),
+        SqueezeNet(input_shape=(300, 300, 3), include_top=False),
         # To prevent over-fitting, 20% dropout rate
         Dropout(0.2),
         # Add this layer to end of Squeeze NN
@@ -74,13 +75,39 @@ for directory in os.listdir(IMG_SAVE_PATH):
             continue
         img = cv2.imread(os.path.join(path, item))
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        img = cv2.resize(img, (227, 227))
+        img = cv2.resize(img, (300, 300))
         dataset.append([img, directory])
 
+# unpack dataset to get into a single array
+# image data will be in 'data', labels in 'labels'
+# e.g => dataset = [
+#     [[image], 'label(rock)']
+# ]
 data, labels = zip(*dataset)
+# map string labels to index values
 labels = list(map(map_label_to_index, labels))
 
+'''
+labels: rock,paper,paper,scissors,rock...
+one hot encoded: [1,0,0], [0,1,0], [0,1,0], [0,0,1], [1,0,0]...
+'''
 
+# one hot encode the labels
+labels = np_utils.to_categorical(labels)
+
+# define the model
+model = train_model()
+model.compile(
+    optimizer=Adam(lr=0.0001),
+    loss='categorical_crossentropy',
+    metrics=['accuracy']
+)
+
+# start training
+model.fit(np.array(data), np.array(labels), epochs=10)
+
+# save the model
+model.save("rps-model-1.h5")
 
 
 

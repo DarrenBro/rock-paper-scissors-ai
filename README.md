@@ -14,10 +14,12 @@ SqueezeNet will be our pre-trained CNN, and we'll re-train its output layers for
 
 # Step 0 - Setup
 1. git clone / download this project
-2. Create a virtual environment (recommended for python, I'm using python3) run in terminal "python3 -m venv ."
-3. run "source bin/activate" you should need your root inserted to your terminal.
-4. having pip installed in useful for the next part "easy_install pip"
-5. there is a dependency_list.txt, you can install them with pip run "pip install -r dependency_list.txt"
+Create a virtual environment (recommended for python, I'm using python3) 
+2. run in terminal "python3 -m venv ." (there's a space after the last 'v')
+3. If you get error like "Unable to symlink" delete the bin folder that was created in root and try again.
+4. run "source bin/activate" you should need your root inserted to your terminal.
+6. having pip3 installed in useful for the next part "easy_install pip"
+7. there is a dependency_list.txt, you can install them with pip run "pip install -r dependency_list.txt"
 
 # Step 1 - Gathering images
 1. script to run first is "collect_image_data.py"
