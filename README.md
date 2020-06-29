@@ -16,6 +16,7 @@ AI Bot to play rock-paper-scissors against a human
 # Step 0 - Setup
 1. git clone / download this project
 Create a virtual environment (recommended for python, I'm using python3) 
+Your pyCharm or chosen IDE might offer this on new a project, if not, here are the steps.
 2. run in terminal "python3 -m venv ." (there's a space after the last 'v'). This will create
 a bin folder in root with an activate script for a virtual env.
 
@@ -29,8 +30,9 @@ For example, here is my path export PATH="/Library/Frameworks/Python.framework/V
 7. There is a dependency_list.txt, run "pip3 install -r dependency_list.txt"
 
 # Step 1 - Gathering images
-1. script to run first is "collect_image_data.py"
+1. Add a dir folder in root called "collected_images"
+2. script to run first is "collect_image_data.py"
 
-2. Run command example: python collect_image_data.py rock 200
-3. Press 's' to start/pause and q to quit.
-4. Images stored in 'collected_images' dir with label set as 1st argument
+3. Run command example: python collect_image_data.py rock 200
+4. Press 's' to start/pause and q to quit.
+5. Images stored in 'collected_images' dir with label set as 1st argument
