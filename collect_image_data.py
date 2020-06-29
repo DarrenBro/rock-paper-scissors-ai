@@ -32,10 +32,10 @@ while True:
     cv2.rectangle(frame, (100, 100), (500, 500), (255, 255, 255), 2)
 
     if start:
-       roi = frame[100:500, 100:500]
-       save_path = os.path.join(IMAGE_PATH, '{}.jpg'.format(count + 1))
-       cv2.imwrite(save_path, roi)
-       count += 1
+        roi = frame[100:500, 100:500]
+        save_path = os.path.join(IMAGE_PATH, '{}.jpg'.format(count + 1))
+        cv2.imwrite(save_path, roi)
+        count += 1
 
     font = cv2.FONT_HERSHEY_SIMPLEX
     cv2.putText(frame, "Capturing {}".format(count), (5, 50), font, 0.7, (0, 255, 255), 2, cv2.LINE_AA)
@@ -51,7 +51,3 @@ while True:
 print("\n{} Image(s) saved to {}".format(count, IMAGE_PATH))
 cap.release()
 cv2.destroyAllWindows()
-
-
-
-
