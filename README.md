@@ -33,6 +33,12 @@ For example, here is my path export PATH="/Library/Frameworks/Python.framework/V
 1. Add a dir folder in root called "collected_images"
 2. script to run first is "collect_image_data.py"
 
-3. Run command example: python collect_image_data.py rock 200
+3. Run command example: "python collect_image_data.py rock 200"
 4. Press 's' to start/pause and q to quit.
 5. Images stored in 'collected_images' dir with label set as 1st argument
+
+# Step 1 - Training Neural Network
+1. script to run first is "python train_model.py"
+
+2. will take some time to run, and will produce a model file called "rps-model-1.h5"
+3. Coming soon
