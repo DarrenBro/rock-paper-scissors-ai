@@ -52,11 +52,17 @@ This is showing us the loss is an extremely low value and the accuracy is 100%
 For now just note that both of these ranges are extremely desired and if you get 
 something similar, this will be enough to test out.
 
-# Step 3 - Running the Model
+# Step 3 - Testing the Model
 1. You can use your model or the example one I've provided, "example-rps-model-1.h5".
+
 2. This file contains all the training parameter, weights and biases which the NN learnt.
-3. Script to test model is "test_model.py", run "python test_model.py".
-As far as I've got.
+3. I've provided test images in "test_images" dir.
+4. Script to test model is "test_model.py", run for any image e.g. "python test_model.py test_images/paper".
+5. LINE NUMBER Change for your model name
+6. Script will print string prediction at end like "Predicted the image is: paper".
+
+# Step 4 - 
+1. 
 
 
 

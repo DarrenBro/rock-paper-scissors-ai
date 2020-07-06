@@ -107,7 +107,7 @@ model.compile(
 model.fit(np.array(data), np.array(labels), epochs=10)
 
 # save the model
-model.save("rps-model-1.h5")
+model.save("example-rps-model-1.h5")
 
 
 
