@@ -15,7 +15,7 @@ INPUT_LABELS = {
     "rock": 0,
     "paper": 1,
     "scissors": 2,
-    "background": 3
+    "none": 3
 }
 
 LABELS_COUNT = len(INPUT_LABELS)
