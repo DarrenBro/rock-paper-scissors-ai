@@ -61,12 +61,17 @@ something similar, this will be enough to test out.
 5. LINE NUMBER Change for your model name
 6. Script will print string prediction at end like "Predicted the image is: paper".
 
-# Step 4 - 
-1. 
+# Step 4 - Play the game
+1. Script is "play.py".
+2.
 
 
-
-
+# Further Improvement Ideas
+1. A web app hosted to allow easier playing and no script running necessary.
+2. rock paper scissors lizard spock
+The rules: "Scissors decapitate Scissors cuts paper, paper covers rock, rock crushes lizard, 
+lizard poisons Spock, Spock smashes scissors, scissors decapitates lizard, lizard eats paper, 
+paper disproves Spock, Spock vaporizes rock, and as it always has, rock crushes scissors."
 
 
 
