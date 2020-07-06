@@ -6,12 +6,11 @@ AI Bot to play rock-paper-scissors against a human
 2. SqueezeNet will be our pre-trained CNN 
 3. We'll re-train its output layers for our 3 new categories
 
-# 5 Steps we'll generally follow to create this ai
+# Steps we'll generally follow to create this ai
 1. Collecting data - gathering images from our own web camera
-2. Creating a Neural Network
-3. Training the model
-4. Test the model
-5. Deploy model into a web app to easily let users plays.
+2. Creating a Neural Network & Training the model
+3. Test the model
+4. Deploy model into a web app to easily let users plays.
 
 # Step 0 - Setup
 1. git clone / download this project
@@ -37,8 +36,31 @@ For example, here is my path export PATH="/Library/Frameworks/Python.framework/V
 4. Press 's' to start/pause and q to quit.
 5. Images stored in 'collected_images' dir with label set as 1st argument
 
-# Step 1 - Training Neural Network
-1. script to run first is "python train_model.py"
+# Step 2 - Training Neural Network
+* You can skip all of step 2 if you just want to test a model, I've provided the necessary file.
+1. The training part is all in "train_model.py" and the squeeze-net model weights .h5 files.
+2. Script to run first is "python train_model.py"
+3. Training time for a batch of (200 images across 4 categories) should be less than 10 minutes.
+4. When finished will produce a model file called "rps-model-1.h5" in project root.
+5. You will also see something like 
 
-2. will take some time to run, and will produce a model file called "rps-model-1.h5"
-3. Coming soon
+Epoch 10/10
+1200/1200 [==============================] - 74s 62ms/step - loss: 4.4444e-05 - acc: 1.0000
+
+Two important figures to look at is 'loss' and 'acc'.
+This is showing us the loss is an extremely low value and the accuracy is 100%
+For now just note that both of these ranges are extremely desired and if you get 
+something similar, this will be enough to test out.
+
+# Step 3 - Running the Model
+1. You can use your model or the example one I've provided, "example-rps-model-1.h5".
+2. This file contains all the training parameter, weights and biases which the NN learnt.
+3. Script to test model is "test_model.py", run "python test_model.py".
+As far as I've got.
+
+
+
+
+
+
+
