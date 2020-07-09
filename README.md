@@ -1,5 +1,9 @@
-# rock-paper-scissors-ai
+# "janken" 
+# The rock-paper-scissors AI
 AI Bot to play rock-paper-scissors against a human
+
+# Why then name janken?
+History tells that the janken game was first introduced by China during the 17th century.
 
 # Language:python Libraries: Keras/OpenCV/Numpy
 1. Code Engine: Image Classifier with 3 categories (rock, paper, scissors)
@@ -15,7 +19,8 @@ AI Bot to play rock-paper-scissors against a human
 # Step 0 - Setup
 1. git clone / download this project
 Create a virtual environment (recommended for python, I'm using python3) 
-Your pyCharm or chosen IDE might offer this on new a project, if not, here are the steps.
+Your pyCharm or chosen IDE might offer (venv) on new a project.
+You can run source venv/bin/activate if it comes pre-setup, if not, here are the steps.
 2. run in terminal "python3 -m venv ." (there's a space after the last 'v'). This will create
 a bin folder in root with an activate script for a virtual env.
 
