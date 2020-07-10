@@ -30,27 +30,27 @@ def mapper(val):
     return REV_CLASS_MAP[val]
 
 
-def calculate_winner(move1, move2):
-    if move1 == move2:
+def determine_winner(user_move, janken_move):
+    if user_move == "rock":
+        if janken_move == "scissors":
+            return "User"
+        if janken_move == "paper":
+            return "Computer"
+
+    if user_move == "paper":
+        if janken_move == "rock":
+            return "User"
+        if janken_move == "scissors":
+            return "Computer"
+
+    if user_move == "scissors":
+        if janken_move == "paper":
+            return "User"
+        if janken_move == "rock":
+            return "Computer"
+
+    if user_move == janken_move:
         return "Tie"
-
-    if move1 == "rock":
-        if move2 == "scissors":
-            return "User"
-        if move2 == "paper":
-            return "Computer"
-
-    if move1 == "paper":
-        if move2 == "rock":
-            return "User"
-        if move2 == "scissors":
-            return "Computer"
-
-    if move1 == "scissors":
-        if move2 == "paper":
-            return "User"
-        if move2 == "rock":
-            return "Computer"
 
 
 model = load_model("example-rps-model-1.h5")
@@ -83,7 +83,7 @@ while True:
     if prev_move != user_move_name:
         if user_move_name != "none":
             computer_move_name = choice(['rock', 'paper', 'scissors'])
-            winner = calculate_winner(user_move_name, computer_move_name)
+            winner = determine_winner(user_move_name, computer_move_name)
         else:
             computer_move_name = "none"
             # winner = "Waiting for your move"
