@@ -12,7 +12,6 @@
 
 # extra: counter for wins
 
-
 from keras.models import load_model
 import cv2
 import numpy as np
@@ -35,19 +34,19 @@ def determine_winner(user_move, janken_move):
         if janken_move == "scissors":
             return "User"
         if janken_move == "paper":
-            return "Computer"
+            return "Janken"
 
     if user_move == "paper":
         if janken_move == "rock":
             return "User"
         if janken_move == "scissors":
-            return "Computer"
+            return "Janken"
 
     if user_move == "scissors":
         if janken_move == "paper":
             return "User"
         if janken_move == "rock":
-            return "Computer"
+            return "Janken"
 
     if user_move == janken_move:
         return "Tie"
@@ -57,16 +56,16 @@ model = load_model("example-rps-model-1.h5")
 
 cap = cv2.VideoCapture(0)
 
-prev_move = None
+previous_move = None
 
 while True:
     ret, frame = cap.read()
     if not ret:
         continue
 
-    # rectangle for user to play
+    # box for user move
     cv2.rectangle(frame, (100, 100), (500, 500), (255, 255, 255), 2)
-    # rectangle for computer to play
+    # box for Janken move
     cv2.rectangle(frame, (800, 100), (1200, 500), (255, 255, 255), 2)
 
     # extract the region of image within the user rectangle
@@ -77,24 +76,26 @@ while True:
     # predict the move made
     prediction = model.predict(np.array([img]))
     move_code = np.argmax(prediction[0])
-    user_move_name = mapper(move_code)
+    user_move_option = mapper(move_code)
 
-    # predict the winner (human vs computer)
-    if prev_move != user_move_name:
-        if user_move_name != "none":
-            computer_move_name = choice(['rock', 'paper', 'scissors'])
-            winner = determine_winner(user_move_name, computer_move_name)
+    # predict winner
+    if previous_move != user_move_option:
+        if user_move_option != "none":
+
+            # choice is random option for now
+            janken_win_move = choice(['rock', 'paper', 'scissors'])
+            winner = determine_winner(user_move_option, janken_win_move)
         else:
-            computer_move_name = "none"
+            janken_win_move = "none"
             # winner = "Waiting for your move"
             winner = "Show me your move"
-    prev_move = user_move_name
+    previous_move = user_move_option
 
-    # display the information
+    # display details
     font = cv2.FONT_HERSHEY_SIMPLEX
-    cv2.putText(frame, "Your Move: " + user_move_name,
+    cv2.putText(frame, "Your Move: " + user_move_option,
                 (50, 50), font, 1.2, (255, 255, 255), 2, cv2.LINE_AA)
-    cv2.putText(frame, "Janken's Move: " + computer_move_name,
+    cv2.putText(frame, "Janken's Move: " + janken_win_move,
                 (750, 50), font, 1.2, (255, 255, 255), 2, cv2.LINE_AA)
 
     try:
@@ -112,10 +113,10 @@ while True:
             cv2.putText(frame, "Winner is: " + winner,
                         (200, 600), font, 1.5, (0, 0, 255), 4, cv2.LINE_AA)
 
-    if computer_move_name != "none":
+    if janken_win_move != "none":
         icon = cv2.imread(
             # "computer_move_images/{}.png".format(computer_move_name))
-            "computer_move_funny/{}.png".format(computer_move_name))
+            "computer_move_funny/{}.png".format(janken_win_move))
         icon = cv2.resize(icon, (400, 400))
         frame[100:500, 800:1200] = icon
     else:
@@ -124,7 +125,8 @@ while True:
         icon = cv2.resize(icon, (400, 400))
         frame[100:500, 800:1200] = icon
 
-    cv2.imshow("Rock Paper Scissors", frame)
+    # Title for panel
+    # cv2.imshow("Rock Paper Scissors", frame)
 
     k = cv2.waitKey(10)
     if k == ord('q'):
