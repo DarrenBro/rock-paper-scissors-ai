@@ -125,8 +125,8 @@ while True:
         icon = cv2.resize(icon, (400, 400))
         frame[100:500, 800:1200] = icon
 
-    # Title for panel
-    # cv2.imshow("Rock Paper Scissors", frame)
+    # Title for panel (Needed for pyGame)
+    cv2.imshow("Janken Plays Rock-Paper-Scissors", frame)
 
     k = cv2.waitKey(10)
     if k == ord('q'):
