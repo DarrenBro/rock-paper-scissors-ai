@@ -75,8 +75,8 @@ while True:
     img = cv2.resize(img, (300, 300))
 
     # predict the move made
-    pred = model.predict(np.array([img]))
-    move_code = np.argmax(pred[0])
+    prediction = model.predict(np.array([img]))
+    move_code = np.argmax(prediction[0])
     user_move_name = mapper(move_code)
 
     # predict the winner (human vs computer)
@@ -86,7 +86,7 @@ while True:
             winner = calculate_winner(user_move_name, computer_move_name)
         else:
             computer_move_name = "none"
-            # winner = "Waiting..."
+            # winner = "Waiting for your move"
             winner = "Show me your move"
     prev_move = user_move_name
 
@@ -94,10 +94,23 @@ while True:
     font = cv2.FONT_HERSHEY_SIMPLEX
     cv2.putText(frame, "Your Move: " + user_move_name,
                 (50, 50), font, 1.2, (255, 255, 255), 2, cv2.LINE_AA)
-    cv2.putText(frame, "Computer's Move: " + computer_move_name,
+    cv2.putText(frame, "Janken's Move: " + computer_move_name,
                 (750, 50), font, 1.2, (255, 255, 255), 2, cv2.LINE_AA)
-    cv2.putText(frame, "Winner: " + winner,
-                (200, 600), font, 1.5, (0, 0, 255), 4, cv2.LINE_AA)
+
+    try:
+        winner
+    except NameError:
+        print("well, winner WASN'T defined after all!")
+    else:
+        if winner == "Show me your move":
+            cv2.putText(frame, winner,
+                        (200, 600), font, 1.5, (0, 0, 255), 4, cv2.LINE_AA)
+        elif winner == "Tie":
+            cv2.putText(frame, "We're both winners!",
+                        (200, 600), font, 1.5, (0, 0, 255), 4, cv2.LINE_AA)
+        else:
+            cv2.putText(frame, "Winner is: " + winner,
+                        (200, 600), font, 1.5, (0, 0, 255), 4, cv2.LINE_AA)
 
     if computer_move_name != "none":
         icon = cv2.imread(
