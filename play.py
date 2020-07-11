@@ -52,6 +52,15 @@ def determine_winner(user_move, janken_move):
         return "Tie"
 
 
+def calculate_win_move(user_move):
+    if user_move == "rock":
+        return 'paper'
+    elif user_move == "paper":
+        return 'scissors'
+    else:
+        return 'rock'
+
+
 model = load_model("example-rps-model-1.h5")
 
 cap = cv2.VideoCapture(0)
@@ -82,8 +91,11 @@ while True:
     if previous_move != user_move_option:
         if user_move_option != "none":
 
-            # choice is random option for now
-            janken_win_move = choice(['rock', 'paper', 'scissors'])
+            # easy mode - choice is a random option
+            # janken_win_move = choice(['rock', 'paper', 'scissors'])
+
+            # rules to pick the winning move
+            janken_win_move = calculate_win_move(user_move_option)
             winner = determine_winner(user_move_option, janken_win_move)
         else:
             janken_win_move = "none"
