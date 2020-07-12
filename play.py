@@ -17,7 +17,7 @@ import cv2
 import numpy as np
 from random import choice
 
-REV_CLASS_MAP = {
+INDEX_MAP = {
     0: "rock",
     1: "paper",
     2: "scissors",
@@ -25,8 +25,8 @@ REV_CLASS_MAP = {
 }
 
 
-def mapper(val):
-    return REV_CLASS_MAP[val]
+def mapper(value):
+    return INDEX_MAP[value]
 
 
 def determine_winner(user_move, janken_move):
@@ -62,9 +62,7 @@ def calculate_win_move(user_move):
 
 
 model = load_model("example-rps-model-1.h5")
-
 cap = cv2.VideoCapture(0)
-
 previous_move = None
 
 while True:
@@ -74,6 +72,7 @@ while True:
 
     # box for user move
     cv2.rectangle(frame, (100, 100), (500, 500), (255, 255, 255), 2)
+
     # box for Janken move
     cv2.rectangle(frame, (800, 100), (1200, 500), (255, 255, 255), 2)
 
