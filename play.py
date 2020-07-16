@@ -71,18 +71,20 @@ while True:
         continue
 
     # box for user move
-    cv2.rectangle(frame, (100, 100), (500, 500), (255, 255, 255), 2)
+    # cv2.rectangle(frame, (100, 100), (400, 400), (255, 255, 255))
+    cv2.rectangle(frame, (100, 100), (450, 450), (255, 255, 255))
 
     # box for Janken move
-    cv2.rectangle(frame, (800, 100), (1200, 500), (255, 255, 255), 2)
+    cv2.rectangle(frame, (800, 100), (1200, 500), (255, 255, 255))
 
-    # extract the region of image within the user rectangle
-    roi = frame[100:500, 100:500]
-    img = cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)
-    img = cv2.resize(img, (300, 300))
+    # get user's move
+    # user_image = frame[100:400, 100:400]
+    user_image = frame[100:450, 100:450]
+    image = cv2.cvtColor(user_image, cv2.COLOR_BGR2RGB)
+    image = cv2.resize(image, (300, 300))
 
     # predict the move made
-    prediction = model.predict(np.array([img]))
+    prediction = model.predict(np.array([image]))
     move_code = np.argmax(prediction[0])
     user_move_option = mapper(move_code)
 

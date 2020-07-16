@@ -8,7 +8,7 @@ import os
 import sys
 
 image_name = sys.argv[1]
-sample_size = int(sys.argv[2])
+data_size = int(sys.argv[2])
 
 IMAGE_SAVED_DIR = 'collected_images'
 IMAGE_PATH = os.path.join(IMAGE_SAVED_DIR, image_name)
@@ -25,10 +25,10 @@ while True:
     if not ret:
         continue
 
-    if count == sample_size:
+    if count == data_size:
         break
 
-    # image, then pt1, pt2, colour, thickness
+    #            (image, (x1, y1), (x2, y2), colour, thickness)
     cv2.rectangle(frame, (100, 100), (500, 500), (255, 255, 255), 2)
 
     if start:

@@ -67,16 +67,22 @@ something similar, this will be enough to test out.
 6. Script will print string prediction at end like "Predicted the image is: paper".
 
 # Step 4 - Play the game
-1. Script is "play.py".
-2.
-
+1. Script to run is "python play.py".
+2. Place your gesture in user box and test it out.
 
 # Further Improvement Ideas
 1. A web app hosted to allow easier playing and no script running necessary.
+
 2. rock paper scissors lizard spock
 The rules: "Scissors decapitate Scissors cuts paper, paper covers rock, rock crushes lizard, 
 lizard poisons Spock, Spock smashes scissors, scissors decapitates lizard, lizard eats paper, 
 paper disproves Spock, Spock vaporizes rock, and as it always has, rock crushes scissors."
+
+3. Evaluation (reported testing) during model training.
+4. Tensor board setup (Only put in as a dependency for now)
+5. Score counter for unlimited gaming but more useful to see if Janken gets 9/10 or 99/100 wins.
+6. Feature focus and black and white imaging only for training and for game running.
+7. Introduce more hyper parameters and tweak existing ones (to optimise training).
 
 
 

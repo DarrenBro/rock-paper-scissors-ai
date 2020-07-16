@@ -15,7 +15,7 @@ INPUT_LABELS = {
     "rock": 0,
     "paper": 1,
     "scissors": 2,
-    "none": 3
+    "noise": 3
 }
 
 LABELS_COUNT = len(INPUT_LABELS)
@@ -53,11 +53,15 @@ def train_model():
         Dropout(0.2),
         # Add this layer to end of Squeeze NN
         Convolution2D(LABELS_COUNT, (1, 1), padding='valid'),
+        # Any negative values become 0 and keeps positive values
+        # Why? Has become the default activation function for many types of neural networks because a model that uses
+        # it is easier to train and often achieves better performance.
         Activation('relu'),
         # Perform classification, calculates average output of each feature map in previous layer
         # i.e data reduction layer, prepares model for Activation('softmax')
         GlobalAveragePooling2D(),
         # softmax give probabilities of each hand sign
+        # 4 image class (problem), 'softmax' handles multi-class, anything more than 2
         Activation('softmax')
     ])
     return model
@@ -83,14 +87,13 @@ for directory in os.listdir(IMG_SAVE_PATH):
 # e.g => dataset = [
 #     [[image], 'label(rock)']
 # ]
+
 data, labels = zip(*dataset)
 # map string labels to index values
 labels = list(map(map_label_to_index, labels))
 
-'''
-labels: rock,paper,paper,scissors,rock...
-one hot encoded: [1,0,0], [0,1,0], [0,1,0], [0,0,1], [1,0,0]...
-'''
+# labels: rock,paper,paper,scissors,rock
+# example: [1,0,0], [0,1,0], [0,1,0], [0,0,1], [1,0,0]
 
 # one hot encode the labels
 labels = np_utils.to_categorical(labels)
@@ -107,19 +110,4 @@ model.compile(
 model.fit(np.array(data), np.array(labels), epochs=10)
 
 # save the model
-model.save("example-rps-model-1.h5")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+model.save("rps-model-2.h5")
