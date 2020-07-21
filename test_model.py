@@ -12,7 +12,7 @@ LABELS_INPUT = {
     0: "rock",
     1: "paper",
     2: "scissors",
-    3: "none"
+    3: "noise"
 }
 
 
@@ -22,6 +22,7 @@ def map_index_to_label(index):
 
 # Change for your model name
 model = load_model("example-rps-model-1.h5")
+# model = load_model("rps-model-2.h5")
 
 # Prepare the image the same way it was in train_model
 img = cv2.imread(file_path)

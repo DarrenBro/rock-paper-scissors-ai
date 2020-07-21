@@ -107,7 +107,10 @@ model.compile(
 )
 
 # start training
+# model.fit(np.array(data), np.array(labels), epochs=5)
+# model.fit(np.array(data), np.array(labels), epochs=8)
 model.fit(np.array(data), np.array(labels), epochs=10)
+# model.fit(np.array(data), np.array(labels), epochs=11)
 
 # save the model
-model.save("rps-model-2.h5")
+model.save("rps-model-5.h5")

@@ -47,6 +47,9 @@ def calculate_win_move(user_move):
 
 
 model = load_model("example-rps-model-1.h5")
+# model = load_model("rps-model-1.h5")
+# model = load_model("rps-model-2.h5")
+# model = load_model("rps-model-3.h5")
 cap = cv2.VideoCapture(0)
 
 previous_move = None
