@@ -46,18 +46,24 @@ def calculate_win_move(user_move):
         return 'rock'
 
 
-model = load_model("example-rps-model-1.h5")
+# model = load_model("example-rps-model-1.h5")
 # model = load_model("rps-model-1.h5")
 # model = load_model("rps-model-2.h5")
-# model = load_model("rps-model-3.h5")
-cap = cv2.VideoCapture(0)
+# Model 3 best so far
+model = load_model("rps-model-3.h5")
+# model = load_model("rps-model-4.h5")
 
+# worst
+# model = load_model("rps-model-1-mean.h5")
+
+cap = cv2.VideoCapture(0)
 previous_move = None
-user_wins = 0
-janken_wins = 0
+
+user_current_winner = False
+
 round_count = 0
-janken_win_count = 0
 user_win_count = 0
+janken_win_count = 0
 
 while True:
     # "frame" will get the next frame in the camera
@@ -101,12 +107,12 @@ while True:
             # rules to pick the winning move
             janken_win_move = calculate_win_move(user_move_option)
             winner = determine_winner(user_move_option, janken_win_move)
-            round_count += 1
 
-            if winner == "Janken":
-                janken_win_count += 1
-            elif winner == "User":
-                user_win_count += 1
+            # round_count += 1
+            # if winner == "Janken":
+            #     janken_win_count += 1
+            # elif winner == "User":
+            #     user_win_count += 1
 
         else:
             janken_win_move = "none"
@@ -120,28 +126,28 @@ while True:
                 (835, 60), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
     # Debugger
-    # cv2.putText(frame, "Round count: " + str(round_count), (100, 450), font, 1, (255, 255, 255), 1,cv2.LINE_AA)
-    # cv2.putText(frame, "Janken win count: " + str(janken_win_count), (100, 480), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
-    # cv2.putText(frame, "User win count: " + str(user_win_count), (100, 510), font, 1, (255, 255, 255), 1,cv2.LINE_AA)
-    # cv2.putText(frame, "user_wins: " + str(user_wins), (100, 540), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
+    cv2.putText(frame, "Round count: " + str(round_count), (100, 450), font, 1, (255, 255, 255), 1,cv2.LINE_AA)
+    cv2.putText(frame, "Janken win count: " + str(janken_win_count), (100, 480), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
+    cv2.putText(frame, "User win count: " + str(user_win_count), (100, 510), font, 1, (255, 255, 255), 1,cv2.LINE_AA)
+    # cv2.putText(frame, "User current winner: " + str(user_current_winner), (100, 540), font, 1, (255, 255, 255), 1,cv2.LINE_AA)
 
     try:
         winner
     except NameError:
         print("well, winner WASN'T defined after all!")
     else:
-        if winner == "Show me your move":
-            # if round_count == 0:
-            cv2.putText(frame, "Best of 3",
-                        (550, 600), font, 1.2, (0, 0, 255), 3, cv2.LINE_AA)
-        elif winner == "Tie":
-            cv2.putText(frame, "We're both winners!",
-                        (550, 600), font, 1.2, (0, 0, 255), 3, cv2.LINE_AA)
-        else:
-            cv2.putText(frame, "Winner is: " + winner,
-                        (470, 600), font, 1.2, (0, 0, 255), 3, cv2.LINE_AA)
+        if janken_win_count == 2:
+            cv2.putText(frame, "Janken Wins!", (505, 600), font, 1.2, (0, 0, 255), 3, cv2.LINE_AA)
+        elif user_win_count == 2:
+            cv2.putText(frame, "User Wins!", (530, 600), font, 1.2, (0, 0, 255), 3, cv2.LINE_AA)
+        elif janken_win_count == 2:
+            cv2.putText(frame, "Janken Wins!", (5250, 600), font, 1.2, (0, 0, 255), 3, cv2.LINE_AA)
+        elif winner == "Show me your move":
+            cv2.putText(frame, "Best of 3", (535, 600), font, 1.2, (0, 0, 255), 3, cv2.LINE_AA)
+        elif winner == "Janken":
+            cv2.putText(frame, "Winner is: " + winner, (470, 600), font, 1.2, (0, 0, 255), 3, cv2.LINE_AA)
 
-    # if janken_win_count and user_win_count == 0:
+    # set you initial empty results
     icon = cv2.imread("win_images/unknown_win_image.png")
     icon = cv2.resize(icon, (50, 50))
 
@@ -149,21 +155,55 @@ while True:
     frame[640:690, 600:650] = icon
     frame[640:690, 700:750] = icon
 
-    if user_wins:
-        icon = cv2.imread("win_images/user_win_image.png")
+    if round_count == 1:
+        if user_current_winner:
+            icon = cv2.imread("win_images/user_win_image.png")
+        else:
+            icon = cv2.imread("win_images/janken_win_image.png")
         icon = cv2.resize(icon, (50, 50))
-
         frame[640:690, 500:550] = icon
-        frame[640:690, 600:650] = icon
-        frame[640:690, 700:750] = icon
 
-        # icon = cv2.imread("win_images/janken_win_image.png")
-        # icon = cv2.resize(icon, (50, 50))
-        # frame[600:650, 600:650] = icon
-        #
-        # icon = cv2.imread("win_images/user_win_image.png")
-        # icon = cv2.resize(icon, (50, 50))
-        # frame[600:650, 600:650] = icon
+    if round_count == 2:
+        if user_current_winner:
+            if user_win_count == 1:
+                icon = cv2.imread("win_images/user_win_image.png")
+                icon = cv2.resize(icon, (50, 50))
+                frame[640:690, 600:650] = icon
+
+                icon = cv2.imread("win_images/janken_win_image.png")
+                icon = cv2.resize(icon, (50, 50))
+                frame[640:690, 500:550] = icon
+
+            elif user_win_count == 2:
+                icon = cv2.imread("win_images/user_win_image.png")
+                icon = cv2.resize(icon, (50, 50))
+                frame[640:690, 500:550] = icon
+                frame[640:690, 600:650] = icon
+        else:
+            if user_win_count == 1:
+                icon = cv2.imread("win_images/user_win_image.png")
+                icon = cv2.resize(icon, (50, 50))
+                frame[640:690, 500:550] = icon
+
+                icon = cv2.imread("win_images/janken_win_image.png")
+                icon = cv2.resize(icon, (50, 50))
+                frame[640:690, 600:650] = icon
+
+            elif user_win_count == 0:
+                icon = cv2.imread("win_images/janken_win_image.png")
+                icon = cv2.resize(icon, (50, 50))
+                frame[640:690, 500:550] = icon
+                frame[640:690, 600:650] = icon
+
+    if round_count == 3:
+        if user_current_winner:
+            icon = cv2.imread("win_images/user_win_image.png")
+            icon = cv2.resize(icon, (50, 50))
+            frame[640:690, 700:750] = icon
+        else:
+            icon = cv2.imread("win_images/janken_win_image.png")
+            icon = cv2.resize(icon, (50, 50))
+            frame[640:690, 700:750] = icon
 
     if janken_win_move != "none":
         icon = cv2.imread(
@@ -177,17 +217,34 @@ while True:
         frame[100:500, 800:1200] = icon
 
     # Title for panel (Needed for pyGame)
-    cv2.imshow("Play Hand Gesture In Frame", frame)
+    cv2.imshow("p:Pause/UnPause Image      u:Add User Win      j:Add Janken Win      r:Restart Game      q:Quit", frame)
 
     key = cv2.waitKey(10)
     if key == ord('u'):
-        user_wins += 1
+        if user_win_count == 2 or janken_win_count == 3:
+            janken_win_count = 0
+            user_win_count = 0
+            round_count = 0
+        round_count += 1
+        user_win_count += 1
+        user_current_winner = True
 
     if key == ord('j'):
-        janken_wins += 1
+        if janken_win_count == 2 or user_win_count == 2:
+            janken_win_count = 0
+            user_win_count = 0
+            round_count = 0
+        round_count += 1
+        janken_win_count += 1
+        user_current_winner = False
 
     if key == ord('p'):
         cv2.waitKey(-1)  # wait until any key is pressed
+
+    if key == ord('r'):
+        round_count = 0
+        janken_win_count = 0
+        user_win_count = 0
 
     if key == ord('q'):
         break

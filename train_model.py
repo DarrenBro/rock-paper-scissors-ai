@@ -96,21 +96,26 @@ labels = list(map(map_label_to_index, labels))
 # example: [1,0,0], [0,1,0], [0,1,0], [0,0,1], [1,0,0]
 
 # one hot encode the labels
+# It takes column which has categorical data that is labeled and then splits the column into multiple columns.
+# The numbers are replaced by 1s and 0s, depending on which column has what value.
 labels = np_utils.to_categorical(labels)
 
 # define the model
 model = train_model()
 model.compile(
     optimizer=Adam(lr=0.0001),
-    loss='categorical_crossentropy',
+    # optimizer=Adam(lr=0.001),
+    loss='mean_squared_error',
+    # loss='categorical_crossentropy',
     metrics=['accuracy']
 )
 
 # start training
+# model.fit(np.array(data), np.array(labels), epochs=1)
 # model.fit(np.array(data), np.array(labels), epochs=5)
 # model.fit(np.array(data), np.array(labels), epochs=8)
 model.fit(np.array(data), np.array(labels), epochs=10)
 # model.fit(np.array(data), np.array(labels), epochs=11)
 
 # save the model
-model.save("rps-model-5.h5")
+model.save("rps-model.h5")
