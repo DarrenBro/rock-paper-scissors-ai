@@ -126,9 +126,9 @@ while True:
                 (835, 60), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
     # Debugger
-    cv2.putText(frame, "Round count: " + str(round_count), (100, 450), font, 1, (255, 255, 255), 1,cv2.LINE_AA)
-    cv2.putText(frame, "Janken win count: " + str(janken_win_count), (100, 480), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
-    cv2.putText(frame, "User win count: " + str(user_win_count), (100, 510), font, 1, (255, 255, 255), 1,cv2.LINE_AA)
+    # cv2.putText(frame, "Round count: " + str(round_count), (100, 450), font, 1, (255, 255, 255), 1,cv2.LINE_AA)
+    # cv2.putText(frame, "Janken win count: " + str(janken_win_count), (100, 480), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
+    # cv2.putText(frame, "User win count: " + str(user_win_count), (100, 510), font, 1, (255, 255, 255), 1,cv2.LINE_AA)
     # cv2.putText(frame, "User current winner: " + str(user_current_winner), (100, 540), font, 1, (255, 255, 255), 1,cv2.LINE_AA)
 
     try:

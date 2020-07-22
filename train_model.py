@@ -10,7 +10,8 @@ import os
 
 IMG_SAVE_PATH = 'collected_images'
 
-# Lets have our label inputs map to index values as that's how the NN will identify them
+# Lets have our label inputs map to index values
+# as that's how the NN will identify them
 INPUT_LABELS = {
     "rock": 0,
     "paper": 1,

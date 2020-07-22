@@ -11,10 +11,10 @@ History tells that the janken game was first introduced by China during the 17th
 3. We'll re-train its output layers for our 3 new categories
 
 # Steps we'll generally follow to create this ai
-1. Collecting data - gathering images from our own web camera
+1. Collecting data - gathering images from your own web camera
 2. Creating a Neural Network & Training the model
 3. Test the model
-4. Deploy model into a web app to easily let users plays.
+4. Play the game!
 
 # Step 0 - Setup
 1. git clone / download this project
@@ -69,9 +69,14 @@ something similar, this will be enough to test out.
 # Step 4 - Play the game
 1. Script to run is "python play.py".
 2. Place your gesture in user box and test it out.
+3. p:Pause/UnPause Image    
+4. u:Add User Win
+5. j:Add Janken Win
+6. r:Restart Game
+7. q:Quit
 
 # Further Improvement Ideas
-1. A web app hosted to allow easier playing and no script running necessary.
+1. A running server to run the game to allow easier playing and no script running necessary.
 
 2. rock paper scissors lizard spock
 The rules: "Scissors decapitate Scissors cuts paper, paper covers rock, rock crushes lizard, 
