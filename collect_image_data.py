@@ -12,34 +12,34 @@ data_size = int(sys.argv[2])
 
 IMAGE_SAVED_DIR = 'collected_images'
 IMAGE_PATH = os.path.join(IMAGE_SAVED_DIR, image_name)
-
 os.mkdir(IMAGE_PATH)
 
 cap = cv2.VideoCapture(0)
-
 start = False
-count = 0
+image_count = 0
 
 while True:
     ret, frame = cap.read()
     if not ret:
         continue
 
-    if count == data_size:
+    if image_count == data_size:
         break
 
-    #            (image, (x1, y1), (x2, y2), colour, thickness)
-    cv2.rectangle(frame, (100, 100), (500, 500), (255, 255, 255), 2)
+    # (image, (x1, y1), (x2, y2), colour, thickness)
+    # Makes a square by difference of 350-150 = 650-450
+    cv2.rectangle(frame, (350, 150), (650, 450), (0, 0, 0))
 
     if start:
-        roi = frame[100:500, 100:500]
-        save_path = os.path.join(IMAGE_PATH, '{}.jpg'.format(count + 1))
+        roi = frame[150:450, 350:650]
+        save_path = os.path.join(IMAGE_PATH, '{}.jpg'.format(image_count + 1))
         cv2.imwrite(save_path, roi)
-        count += 1
+        image_count += 1
 
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    cv2.putText(frame, "Capturing {}".format(count), (5, 50), font, 0.7, (0, 255, 255), 2, cv2.LINE_AA)
-    cv2.imshow("Press 's' to start/pause. Press 'q' to quit", frame)
+    text_font = cv2.FONT_HERSHEY_SIMPLEX
+    cv2.putText(frame, "Press 's' to save images", (350, 500), text_font, 0.7, (0, 255, 255), 2, cv2.LINE_AA)
+    cv2.putText(frame, "Image count =  {}".format(image_count), (350, 530), text_font, 0.7, (0, 255, 255), 2, cv2.LINE_AA)
+    cv2.imshow("Press 's' to start/pause.    Press 'q' to quit", frame)
 
     k = cv2.waitKey(10)
     if k == ord('s'):
@@ -48,6 +48,6 @@ while True:
     if k == ord('q'):
         break
 
-print("\n{} Image(s) saved to {}".format(count, IMAGE_PATH))
+print("\n{} Image(s) saved to {}".format(image_count, IMAGE_PATH))
 cap.release()
 cv2.destroyAllWindows()
