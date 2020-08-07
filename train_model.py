@@ -45,22 +45,32 @@ def map_label_to_index(index):
 # Pass SqueezeNet Neural Network into Keras Sequential Model
 def train_model():
     model = Sequential([
-        # image size is 227 x 227 pixels. 3 is for RGB
+        # image size is 300 x 300 pixels. 3 is for RGB
         # Include_top lets you select if you want the final dense layers or not
         # Dense layers are capable of interpreting found patterns in order to classify: e.g. this image contains rock
         # Set to False as we have labeled what rock data looks like already
         SqueezeNet(input_shape=(300, 300, 3), include_top=False),
+
         # To prevent over-fitting, 20% dropout rate
         Dropout(0.2),
+
         # Add this layer to end of Squeeze NN
         Convolution2D(LABELS_COUNT, (1, 1), padding='valid'),
+
         # Any negative values become 0 and keeps positive values
-        # Why? Has become the default activation function for many types of neural networks because a model that uses
+        # Why? An Activation function is responsible for taking inputs and assigning weights to output nodes, a model
+        # can't coordinate itself well with negative values,
+        # it becomes un-uniform in the sense of how we expect the model to perform.
+        # 𝑓(𝑥) = max{0, 𝑥} => The output of a ReLU unit is non-negative.
+        # Returning x, if less than zero then max returns 0.
+        # Has become the default activation function for many types of neural networks because a model that uses
         # it is easier to train and often achieves better performance.
         Activation('relu'),
+
         # Perform classification, calculates average output of each feature map in previous layer
         # i.e data reduction layer, prepares model for Activation('softmax')
         GlobalAveragePooling2D(),
+
         # softmax give probabilities of each hand sign
         # 4 image class (problem), 'softmax' handles multi-class, anything more than 2
         Activation('softmax')
@@ -101,7 +111,7 @@ labels = list(map(map_label_to_index, labels))
 # The numbers are replaced by 1s and 0s, depending on which column has what value.
 labels = np_utils.to_categorical(labels)
 
-# define the model
+# compile the model
 model = train_model()
 model.compile(
     optimizer=Adam(lr=0.0001),
