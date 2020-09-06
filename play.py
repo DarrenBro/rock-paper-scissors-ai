@@ -46,16 +46,8 @@ def calculate_win_move(user_move):
         return 'rock'
 
 
-# model = load_model("example-rps-model-1.h5")
-# model = load_model("rps-model-1.h5")
-# model = load_model("rps-model-2.h5")
-# Model 3 best so far
-model = load_model("rps-model-3.h5")
-# model = load_model("rps-model-4.h5")
-
-# worst
-# model = load_model("rps-model-1-mean.h5")
-
+# Change me to any new models you make
+model = load_model("example-rps-model-1.h5")
 cap = cv2.VideoCapture(0)
 previous_move = None
 
