@@ -1,5 +1,5 @@
 # for loading already trained model into memory
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 # for loading images into memory
 import cv2
 import numpy as np
@@ -22,7 +22,6 @@ def map_index_to_label(index):
 
 # Change for your model name
 model = load_model("example-rps-model-1.h5")
-# model = load_model("rps-model-2.h5")
 
 # Prepare the image the same way it was in train_model
 img = cv2.imread(file_path)

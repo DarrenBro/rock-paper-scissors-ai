@@ -1,4 +1,5 @@
-from keras.models import load_model
+# for loading already trained model into memory
+from tensorflow.keras.models import load_model
 import cv2
 import numpy as np
 
