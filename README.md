@@ -1,9 +1,11 @@
-# "janken" 
-# The rock-paper-scissors AI
+# The rock-paper-scissors AI: "janken"
 AI Bot to play rock-paper-scissors against a human
 
-# Why then name janken?
-History tells that the janken game was first introduced by China during the 17th century.
+# Medium Article
+https://towardsdatascience.com/rock-paper-scissors-ai-bot-janken-ee2d3089b778
+
+# Why the name janken?
+Rock Paper Scissors was first introduced by China during the 17th century, it was called Janken.
 
 # Language:python Libraries: Keras/OpenCV/Numpy
 1. Code Engine: Image Classifier with 3 categories (rock, paper, scissors)
