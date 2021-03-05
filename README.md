@@ -37,7 +37,10 @@ For example, here is my path export PATH="/Library/Frameworks/Python.framework/V
 
 # Step 1 - Gathering images
 1. Add a dir folder in root called "collected_images"
-2. script to run first is "collect_image_data.py"
+2. In this dir add 4 more folders like so
+![image](https://user-images.githubusercontent.com/8710774/110144849-b3e91a80-7dd0-11eb-8520-8e575730b338.png)
+
+4. script to run first is "collect_image_data.py"
 
 3. Run command example: "python collect_image_data.py rock 200"
 4. Press 's' to start/pause and q to quit.
